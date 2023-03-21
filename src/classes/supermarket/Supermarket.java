@@ -34,21 +34,22 @@ public class Supermarket {
 
     public double calculateTotalProfit() {
         double totalProfit = 0;
-        for (Food food : this.foodsForSale) {
-            if (food instanceof Product) {
-                Product product = (Product) food;
-                totalProfit += product.calculateTotalPrice(0);
-            }
-        }
-
         for (Food food : this.foodsBought) {
             if (food instanceof Product) {
                 Product product = (Product) food;
-                totalProfit -= product.calculateTotalPrice(0);
+                totalProfit -= product.calculateTotalPrice(product.getQuantity());
+            }
+        }
+    
+        for (Food food : this.foodsForSale) {
+            if (food instanceof Product) {
+                Product product = (Product) food;
+                totalProfit += product.calculateTotalPrice(product.getQuantity());
             }
         }
         return totalProfit;
     }
+    
 
     public String getName() {
         return name;
