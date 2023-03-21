@@ -1,34 +1,40 @@
 package classes.consumer;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-import subClasses.purchasedFood.PurchasedFood;
+import classes.food.Food;
+import classes.product.Product;
 
 public class Consumer {
     private String name;
-    private Date birthDate;
-    private ArrayList<PurchasedFood> purchasedFood = new ArrayList<PurchasedFood>();
-    
-    public Consumer(String name, Date birthDate) {
+    private LocalDate birthDate;
+    private List<Food> foodsBought;
+
+    public Consumer(String name, LocalDate birthDate) {
         this.name = name;
         this.birthDate = birthDate;
+        this.foodsBought = new ArrayList<>();
     }
 
-    public void addPurchasedFood(PurchasedFood food) {
-        purchasedFood.add(food);
+    public void addFoodBought(Food food) {
+        this.foodsBought.add(food);
     }
 
-    public void removePurchasedFood(PurchasedFood food) {
-        purchasedFood.remove(food);
+    public void removeFoodBought(Food food) {
+        this.foodsBought.remove(food);
     }
 
-    public double calculateTotalSpent() {
-        double totalSpent = 0;
-        for (PurchasedFood food : purchasedFood) {
-            totalSpent += food.getPrice();
+    public double calculateTotalPrice() {
+        double totalPrice = 0;
+        for (Food food : this.foodsBought) {
+            if (food instanceof Product) {
+                Product product = (Product) food;
+                totalPrice += product.calculateTotalPrice(0);
+            }
         }
-        return totalSpent;
+        return totalPrice;
     }
 
     public String getName() {
@@ -39,15 +45,12 @@ public class Consumer {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public ArrayList<PurchasedFood> getPurchasedFood() {
-        return purchasedFood;
-    }
 }

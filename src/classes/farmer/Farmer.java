@@ -1,28 +1,37 @@
 package classes.farmer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import classes.farm.Farm;
-import subClasses.farmersFarm.FarmersFarm;
 
 public class Farmer {
     private String name;
     private int age;
-    private ArrayList<FarmersFarm> farmers = new ArrayList<FarmersFarm>();
+    private List<Farm> farms;
+    private double totalHectaresCultivated;
 
-    public void addFarm(Farm name, double acres) {
-        FarmersFarm farm = new FarmersFarm(name, acres);
-        farmers.add(farm);
+    public Farmer(String name, int age) {
+        this.name = name;
+        this.age = age;
+        this.farms = new ArrayList<Farm>();
+        this.totalHectaresCultivated = 0.0;
     }
 
-    public void removeFarm(FarmersFarm farm) {
-        farmers.remove(farm);
+    public void addFarm(Farm farm) {
+        farms.add(farm);
+        totalHectaresCultivated += farm.getSizeInHectares();
     }
 
-    public double calculateTotalProduction () {
-        double totalProduction = 0;
-        for (FarmersFarm farm : farmers) {
-            totalProduction += farm.getTotalProduction();
+    public void removeFarm(Farm farm) {
+        farms.remove(farm);
+        totalHectaresCultivated -= farm.getSizeInHectares();
+    }
+
+    public double calculateTotalProduction() {
+        double totalProduction = 0.0;
+        for (Farm farm : farms) {
+            totalProduction += farm.calculateTotalPrice();
         }
         return totalProduction;
     }
@@ -43,18 +52,20 @@ public class Farmer {
         this.age = age;
     }
 
-    public ArrayList<FarmersFarm> getFarmers() {
-        return farmers;
+    public List<Farm> getFarms() {
+        return farms;
     }
 
-    public void setFarmers(ArrayList<FarmersFarm> farmers) {
-        this.farmers = farmers;
+    public void setFarms(List<Farm> farms) {
+        this.farms = farms;
     }
 
-    public Farmer(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public double getTotalHectaresCultivated() {
+        return totalHectaresCultivated;
     }
 
+    public void setTotalHectaresCultivated(double totalHectaresCultivated) {
+        this.totalHectaresCultivated = totalHectaresCultivated;
+    }
 
 }

@@ -1,29 +1,27 @@
 package classes.product;
 
-import java.util.Date;
-
 import classes.food.Food;
 
+import java.time.LocalDate;
+
 public class Product extends Food {
-    private float price;
+    private double unityPrice;
 
-    public Product(String name, int quantity, Date expirationDate, float price) {
+    public Product(String name, int quantity, LocalDate expirationDate, double unityPrice) {
         super(name, quantity, expirationDate);
-
-        this.price = price;
+        this.unityPrice = unityPrice;
     }
 
-    public float getPrice() {
-        return price;
+    public double calculateTotalPrice(int quantity) {
+        return unityPrice * quantity;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public double getUnityPrice() {
+        return unityPrice;
     }
 
-    public void calculateTotalPrice() {
-        float totalPrice = getQuantity() * price;
-        System.out.println("O preço total do produto " + getName() + " é de R$" + totalPrice);
+    public void setUnityPrice(double unityPrice) {
+        this.unityPrice = unityPrice;
     }
 
 }

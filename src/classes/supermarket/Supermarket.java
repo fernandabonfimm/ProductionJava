@@ -1,55 +1,44 @@
 package classes.supermarket;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import subClasses.clients.Clients;
-import subClasses.foodSale.FoodSale;
+import classes.consumer.Consumer;
+import classes.food.Food;
 
 public class Supermarket {
     private String name;
-    private ArrayList<FoodSale> foodSales = new ArrayList<FoodSale>();
-    private ArrayList<Clients> clients = new ArrayList<Clients>();
+    private List<Food> foodsForSale;
+    private List<Consumer> clients;
 
-    public Supermarket(String string, FoodSale foodSale, Clients clients) {
-        this.name = string;
-        this.foodSales.add(foodSale);
-        this.clients.add(clients);
+    public Supermarket(String name) {
+        this.name = name;
+        this.foodsForSale = new ArrayList<Food>();
+        this.clients = new ArrayList<Consumer>();
     }
 
-    public void buyFoodSale(FoodSale foodSale, Clients client) {
-        foodSales.remove(foodSale);
-        clients.add(client);
+    public void addFoodForSale(Food food) {
+        foodsForSale.add(food);
     }
 
-    public void sellFoodSale(FoodSale foodSale, int price){
-        foodSales.add(foodSale);
-        foodSale.setPrice(price);
+    public void removeFoodForSale(Food food) {
+        foodsForSale.remove(food);
     }
 
-    public void addFoodSale(String name, double price) {
-        FoodSale foodSale = new FoodSale(name, price);
-        foodSales.add(foodSale);
+    public void addClient(Consumer consumer) {
+        clients.add(consumer);
     }
 
-    public void removeFoodSale(FoodSale foodSale) {
-        foodSales.remove(foodSale);
+    public void removeClient(Consumer consumer) {
+        clients.remove(consumer);
     }
 
-    public void addClient(String name) {
-        Clients client = new Clients(name);
-        clients.add(client);
-    }
-
-    public void removeClient(Clients client) {
-        clients.remove(client);
-    }
-
-    public void calculateTotalProfit() {
-        double totalProfit = 0;
-        for (FoodSale foodSale : foodSales) {
-            totalProfit += foodSale.getPrice();
+    public double calculateTotalProfit() {
+        double totalProfit = 0.0;
+        for (Consumer consumer : clients) {
+            totalProfit += consumer.calculateTotalPrice();
         }
-        System.out.println("Lucro total do supermercado: " + totalProfit);
+        return totalProfit;
     }
 
     public String getName() {
@@ -60,19 +49,20 @@ public class Supermarket {
         this.name = name;
     }
 
-    public ArrayList<FoodSale> getFoodSales() {
-        return foodSales;
+    public List<Food> getFoodsForSale() {
+        return foodsForSale;
     }
 
-    public void setFoodSales(ArrayList<FoodSale> foodSales) {
-        this.foodSales = foodSales;
+    public void setFoodsForSale(List<Food> foodsForSale) {
+        this.foodsForSale = foodsForSale;
     }
 
-    public ArrayList<Clients> getClients() {
+    public List<Consumer> getClients() {
         return clients;
     }
 
-    public void setClients(ArrayList<Clients> clients) {
+    public void setClients(List<Consumer> clients) {
         this.clients = clients;
     }
+
 }
