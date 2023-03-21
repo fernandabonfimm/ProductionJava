@@ -5,38 +5,47 @@ import java.util.List;
 
 import classes.consumer.Consumer;
 import classes.food.Food;
+import classes.product.Product;
 
 public class Supermarket {
     private String name;
     private List<Food> foodsForSale;
     private List<Consumer> clients;
+    private List<Food> foodsBought;
 
     public Supermarket(String name) {
         this.name = name;
-        this.foodsForSale = new ArrayList<Food>();
-        this.clients = new ArrayList<Consumer>();
+        this.foodsForSale = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.foodsBought = new ArrayList<>();
     }
 
     public void addFoodForSale(Food food) {
-        foodsForSale.add(food);
-    }
-
-    public void removeFoodForSale(Food food) {
-        foodsForSale.remove(food);
+        this.foodsForSale.add(food);
     }
 
     public void addClient(Consumer consumer) {
-        clients.add(consumer);
+        this.clients.add(consumer);
     }
 
-    public void removeClient(Consumer consumer) {
-        clients.remove(consumer);
+    public void addFoodBought(Food food) {
+        this.foodsBought.add(food);
     }
 
     public double calculateTotalProfit() {
-        double totalProfit = 0.0;
-        for (Consumer consumer : clients) {
-            totalProfit += consumer.calculateTotalPrice();
+        double totalProfit = 0;
+        for (Food food : this.foodsForSale) {
+            if (food instanceof Product) {
+                Product product = (Product) food;
+                totalProfit += product.calculateTotalPrice(0);
+            }
+        }
+
+        for (Food food : this.foodsBought) {
+            if (food instanceof Product) {
+                Product product = (Product) food;
+                totalProfit -= product.calculateTotalPrice(0);
+            }
         }
         return totalProfit;
     }

@@ -35,6 +35,7 @@ public class Consumer {
             }
         }
         return totalPrice;
+        
     }
 
     public String getName() {

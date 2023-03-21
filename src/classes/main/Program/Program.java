@@ -1,7 +1,6 @@
-package classes.main.Program;
+package classes.main.program;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import classes.farm.Farm;
 import classes.farmer.Farmer;
