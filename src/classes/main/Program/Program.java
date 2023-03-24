@@ -30,27 +30,28 @@ public class Program {
 
         // Criando produtos e alimentos a serem vendidos
         Food food1 = new Food("Arroz", 100, expirationDate1);
-        Product product = new Product(food1.getName(), food1.getQuantity(), food1.getExpirationDate(), 10.0);
+        Product product = new Product(food1.getName(), food1.getQuantity(), food1.getExpirationDate(), 20.0);
         farm1.addCultivatedProduct(product);
+
         
         Food food2 = new Food("Feijão", 100, expirationDate2);
         Product product2 = new Product(food2.getName(), food2.getQuantity(), food2.getExpirationDate(), 10.0);
         farm1.addCultivatedProduct(product2);
 
-        Food food3 = new Food("Macarrão", 100, expirationDate3);
-        Product product3 = new Product(food3.getName(), food3.getQuantity(), food3.getExpirationDate(), 10.0);
+        Food food3 = new Food("Macarrão", 210, expirationDate3);
+        Product product3 = new Product(food3.getName(), food3.getQuantity(), food3.getExpirationDate(), 3.0);
         farm2.addCultivatedProduct(product3);
 
-        Food food4 = new Food("Farinha", 100, expirationDate1);
-        Product product4 = new Product(food4.getName(), food4.getQuantity(), food4.getExpirationDate(), 10.0);
+        Food food4 = new Food("Farinha", 340, expirationDate1);
+        Product product4 = new Product(food4.getName(), food4.getQuantity(), food4.getExpirationDate(), 5.0);
         farm2.addCultivatedProduct(product4);
 
         // Criando supermercado
         Supermarket supermarket = new Supermarket("Tonin SuperAtacados");
-        supermarket.addFoodForSale(food1);
-        supermarket.addFoodForSale(food2);
-        supermarket.addFoodForSale(food3);
-        supermarket.addFoodForSale(food4);
+        supermarket.addFoodForSale(product);
+        supermarket.addFoodForSale(product2);
+        supermarket.addFoodForSale(product3);
+        supermarket.addFoodForSale(product4);
         
         // Criando consumidores
         Consumer consumer1 = new Consumer("Elisa", LocalDate.of(2000, 1, 1));
@@ -63,14 +64,15 @@ public class Program {
         supermarket.addClient(consumer3);
         
         // Simulando a compra de alimentos pelos consumidores
-        consumer1.addFoodBought(food1);
-        consumer1.addFoodBought(food3);
+        consumer1.addFoodBought(product);
+        consumer1.addFoodBought(product2);
         
-        consumer2.addFoodBought(food1);
-        consumer2.addFoodBought(food2);
+        consumer2.addFoodBought(product3);
+        consumer2.addFoodBought(product4);
         
-        consumer3.addFoodBought(food2);
-        consumer3.addFoodBought(food3);
+        consumer3.addFoodBought(product2);
+        consumer3.addFoodBought(product3);
+
         
         // Exibindo o lucro total do supermercado
         double totalProfit = supermarket.calculateTotalProfit();

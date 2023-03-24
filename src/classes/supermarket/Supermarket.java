@@ -33,15 +33,8 @@ public class Supermarket {
     }
 
     public double calculateTotalProfit() {
-        double totalProfit = 0;
-        for (Food food : this.foodsBought) {
-            if (food instanceof Product) {
-                Product product = (Product) food;
-                totalProfit -= product.calculateTotalPrice(product.getQuantity());
-            }
-        }
-    
-        for (Food food : this.foodsForSale) {
+        double totalProfit = 0.0;
+        for (Food food : foodsForSale) {
             if (food instanceof Product) {
                 Product product = (Product) food;
                 totalProfit += product.calculateTotalPrice(product.getQuantity());
@@ -49,7 +42,6 @@ public class Supermarket {
         }
         return totalProfit;
     }
-    
 
     public String getName() {
         return name;
